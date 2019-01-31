@@ -1,0 +1,1 @@
+SunMoon is a Python project using PyQt5 (non commercial) and Astral to display sunrise, sunset, daylight, and moon phase.
