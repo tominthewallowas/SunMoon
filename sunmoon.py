@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''
-SunMoon is a Python project using PyQt5 (non commercial) to show sunrise, sunset, and moon phase.
+SunMoon is a Python project using PyQt5 (non commercial) and Astral to show sunrise, sunset, and moon phase.
 Author: Tom Bingham
 '''
 
