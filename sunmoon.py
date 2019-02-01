@@ -35,12 +35,20 @@ class SunMoonWindow(QMainWindow):
 
     def setConfigurationText(self):
         config_label_text_color = "#" + self.miscellaneous['config_text_color']
+        self.ui.leLatitude.setText(self.astral['latitude'])
         self.ui.lblLatitude.setText("<font color='" + config_label_text_color + "'>" + self.astral['latitude'] + "</font>")
+        self.ui.leLongitude.setText(self.astral['longitude'])
         self.ui.lblLongitude.setText("<font color='" + config_label_text_color + "'>" + self.astral['longitude'] + "</font>")
+        self.ui.leElevation.setText(self.astral['elevation'])
         self.ui.lblElevation.setText("<font color='" + config_label_text_color + "'>" + self.astral['elevation'] + "</font>")
+        self.ui.leLocation.setText(self.astral['name'])
         self.ui.lblLocation.setText("<font color='" + config_label_text_color + "'>" + self.astral['name'] + "</font>")
+        self.ui.leCountry.setText(self.astral['region'])
         self.ui.lblRegion.setText("<font color='" + config_label_text_color + "'>" + self.astral['region'] + "</font>")
+        self.ui.leTimeZone.setText(self.astral['timezone'])
         self.ui.lblTimeZone.setText("<font color='" + config_label_text_color + "'>" + self.astral['timezone'] + "</font>")
+        self.ui.leMinimumInterval.setText(self.miscellaneous['minimum_interval'])
+        self.ui.leTextColor.setText(self.miscellaneous['config_text_color'])
 
     def setCurrentDate(self):
         self.ui.deDate.setDate(QDate.currentDate())
@@ -60,8 +68,17 @@ class SunMoonWindow(QMainWindow):
         self.ui.deDate.dateChanged.connect(self.setTimes)
         self.ui.pbStart.clicked.connect(lambda: self.autoStartStop("start"))
         self.ui.pbStop.clicked.connect(lambda: self.autoStartStop("stop"))
+        self.ui.pbSave.clicked.connect(lambda: self.configActions("save"))
+        self.ui.pbDiscard.clicked.connect(lambda: self.configActions("discard"))
+        self.ui.pbClear.clicked.connect(lambda: self.configActions("clear"))
         self.timer.timeout.connect(self.advanceDate)
         self.ui.pbSetCurrentDate.clicked.connect(self.setCurrentDate)
+
+    #----------------------------------------------------------------------
+    def configActions(self, action):
+        """Some pushbutton actions route here."""
+        print(action)
+        
 
     def autoStartStop(self, action):
         if action == 'start':
