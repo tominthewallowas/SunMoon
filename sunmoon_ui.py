@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '.\sunmoon.ui'
+# Form implementation generated from reading ui file 'sunmoon.ui'
 #
 # Created by: PyQt5 UI code generator 5.11.3
 #
@@ -36,22 +36,29 @@ class Ui_MainWindow(object):
         self.label_3.setAlignment(QtCore.Qt.AlignRight|QtCore.Qt.AlignTrailing|QtCore.Qt.AlignVCenter)
         self.label_3.setObjectName("label_3")
         self.leSunrise = QtWidgets.QLineEdit(self.centralwidget)
+        self.leSunrise.setEnabled(True)
         self.leSunrise.setGeometry(QtCore.QRect(110, 40, 131, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.leSunrise.setFont(font)
+        self.leSunrise.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.leSunrise.setReadOnly(True)
         self.leSunrise.setObjectName("leSunrise")
         self.leSunset = QtWidgets.QLineEdit(self.centralwidget)
         self.leSunset.setGeometry(QtCore.QRect(110, 70, 131, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.leSunset.setFont(font)
+        self.leSunset.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.leSunset.setReadOnly(True)
         self.leSunset.setObjectName("leSunset")
         self.leDaylight = QtWidgets.QLineEdit(self.centralwidget)
         self.leDaylight.setGeometry(QtCore.QRect(110, 100, 131, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.leDaylight.setFont(font)
+        self.leDaylight.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.leDaylight.setReadOnly(True)
         self.leDaylight.setObjectName("leDaylight")
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(20, 10, 82, 13))
@@ -78,9 +85,12 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.leMoonPhase.setFont(font)
+        self.leMoonPhase.setFocusPolicy(QtCore.Qt.NoFocus)
+        self.leMoonPhase.setReadOnly(True)
         self.leMoonPhase.setObjectName("leMoonPhase")
         self.gvMoon = QtWidgets.QGraphicsView(self.centralwidget)
         self.gvMoon.setGeometry(QtCore.QRect(30, 170, 211, 171))
+        self.gvMoon.setFocusPolicy(QtCore.Qt.NoFocus)
         self.gvMoon.setInteractive(False)
         self.gvMoon.setObjectName("gvMoon")
         self.pbStop = QtWidgets.QPushButton(self.centralwidget)
@@ -113,6 +123,7 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.pbSetCurrentDate.setFont(font)
+        self.pbSetCurrentDate.setFocusPolicy(QtCore.Qt.ClickFocus)
         self.pbSetCurrentDate.setObjectName("pbSetCurrentDate")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(330, 320, 75, 23))
@@ -210,6 +221,16 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         self.pushButton.clicked.connect(MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        MainWindow.setTabOrder(self.deDate, self.sbInterval)
+        MainWindow.setTabOrder(self.sbInterval, self.pbStart)
+        MainWindow.setTabOrder(self.pbStart, self.pbStop)
+        MainWindow.setTabOrder(self.pbStop, self.pushButton)
+        MainWindow.setTabOrder(self.pushButton, self.gvMoon)
+        MainWindow.setTabOrder(self.gvMoon, self.leSunrise)
+        MainWindow.setTabOrder(self.leSunrise, self.leSunset)
+        MainWindow.setTabOrder(self.leSunset, self.leDaylight)
+        MainWindow.setTabOrder(self.leDaylight, self.pbSetCurrentDate)
+        MainWindow.setTabOrder(self.pbSetCurrentDate, self.leMoonPhase)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

@@ -78,6 +78,9 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="leSunrise">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -91,8 +94,14 @@
       <pointsize>10</pointsize>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string>7:27 AM PST</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLineEdit" name="leSunset">
@@ -109,8 +118,14 @@
       <pointsize>10</pointsize>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string>4:17 PM PST</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLineEdit" name="leDaylight">
@@ -127,8 +142,14 @@
       <pointsize>10</pointsize>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string>8 hours, 45 minutes</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label_4">
@@ -202,8 +223,14 @@
       <pointsize>10</pointsize>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string>Day 23</string>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QGraphicsView" name="gvMoon">
@@ -214,6 +241,9 @@
       <width>211</width>
       <height>171</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="interactive">
      <bool>false</bool>
@@ -304,6 +334,9 @@
      <font>
       <pointsize>10</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::ClickFocus</enum>
     </property>
     <property name="text">
      <string>&amp;Current Date</string>
@@ -574,6 +607,19 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>deDate</tabstop>
+  <tabstop>sbInterval</tabstop>
+  <tabstop>pbStart</tabstop>
+  <tabstop>pbStop</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>gvMoon</tabstop>
+  <tabstop>leSunrise</tabstop>
+  <tabstop>leSunset</tabstop>
+  <tabstop>leDaylight</tabstop>
+  <tabstop>pbSetCurrentDate</tabstop>
+  <tabstop>leMoonPhase</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
