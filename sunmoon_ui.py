@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(571, 512)
+        MainWindow.resize(510, 408)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.twMain = QtWidgets.QTabWidget(self.centralwidget)
@@ -337,7 +337,7 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.retranslateUi(MainWindow)
-        self.twMain.setCurrentIndex(1)
+        self.twMain.setCurrentIndex(0)
         self.pushButton.clicked.connect(MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
