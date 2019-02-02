@@ -14,7 +14,6 @@ from sunmoon_ui import *
 
 import tombo.configfile
 
-
 class SunMoonWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -22,16 +21,22 @@ class SunMoonWindow(QMainWindow):
         self.ui.setupUi(self)
         self.setupGraphicsScene()
         self.configuration = tombo.configfile.ConfigFile('sunmoon.conf')
-        self.astral = self.configuration.getItems('ASTRAL')
-        self.miscellaneous = self.configuration.getItems('MISCELLANEOUS')
-        self.location = Location((self.astral['name'], self.astral['region'], float(self.astral['latitude']), float(self.astral['longitude']), self.astral['timezone'], self.astral['elevation']))
+        self.getConfiguration()
         self.minimum_interval = self.miscellaneous['minimum_interval']
+        self.setLocation()
         self.timer = QTimer()
         self.setupMethods()
         self.setCurrentDate()
         self.setConfigurationText()
         self.displayedDate = QDateTime(self.ui.deDate.date())
         self.show()
+
+    def setLocation(self):
+        self.location = Location((self.astral['name'], self.astral['region'], float(self.astral['latitude']), float(self.astral['longitude']), self.astral['timezone'], self.astral['elevation']))
+
+    def getConfiguration(self):
+        self.astral = self.configuration.getItems('ASTRAL')
+        self.miscellaneous = self.configuration.getItems('MISCELLANEOUS')
 
     def setConfigurationText(self):
         config_label_text_color = "#" + self.miscellaneous['config_text_color']
@@ -52,6 +57,7 @@ class SunMoonWindow(QMainWindow):
 
     def setCurrentDate(self):
         self.ui.deDate.setDate(QDate.currentDate())
+        self.displayedDate = QDateTime(self.ui.deDate.date())
 
     def setupGraphicsScene(self):
         self.scene = QGraphicsScene()
@@ -77,7 +83,46 @@ class SunMoonWindow(QMainWindow):
     #----------------------------------------------------------------------
     def configActions(self, action):
         """Some pushbutton actions route here."""
-        print(action)
+        #print(action)
+        if action == 'clear':
+            self.clearConfigFields()
+        elif action == 'discard':
+            self.clearConfigFields()
+            self.setConfigurationText()
+        elif action == 'save':
+            self.saveConfiguration()
+
+    #----------------------------------------------------------------------
+    def saveConfiguration(self):
+        """Save info from config fields."""
+        self.configuration.setValue('MISCELLANEOUS', 'minimum_interval', self.ui.leMinimumInterval.text())
+        self.configuration.setValue('MISCELLANEOUS', 'config_text_color', self.ui.leTextColor.text())
+        self.configuration.setValue('ASTRAL', 'latitude', self.ui.leLatitude.text())
+        self.configuration.setValue('ASTRAL', 'longitude', self.ui.leLongitude.text())
+        self.configuration.setValue('ASTRAL', 'elevation', self.ui.leElevation.text())
+        self.configuration.setValue('ASTRAL', 'timezone', self.ui.leTimeZone.text())
+        self.configuration.setValue('ASTRAL', 'name', self.ui.leLocation.text())
+        self.configuration.setValue('ASTRAL', 'region', self.ui.leCountry.text())
+        self.getConfiguration()
+        self.setConfigurationText()
+
+    #----------------------------------------------------------------------
+    def clearConfigFields(self):
+        """Clear text from all config tab fields."""
+        self.ui.leLatitude.setText('')
+        self.ui.leLongitude.setText('')
+        self.ui.leElevation.setText('')
+        self.ui.leLocation.setText('')
+        self.ui.leCountry.setText('')
+        self.ui.leTimeZone.setText('')
+        self.ui.leMinimumInterval.setText('')
+        self.ui.leTextColor.setText('')
+        
+    #----------------------------------------------------------------------
+    def discardConfigFields(self):
+        """Clear all config fields and repopulate with original text."""
+        self.clearConfigFields()
+        self.setConfigurationText()
         
 
     def autoStartStop(self, action):
@@ -108,18 +153,14 @@ class SunMoonWindow(QMainWindow):
         return '{} hours, {} minutes'.format(timedelta.seconds // 3600, (timedelta.seconds // 60) % 60)
 
     def setMoonPhase(self, moon_phase):
-        print(moon_phase)
+        #print(moon_phase)
         increment = 100 / 14
         self.scene.removeItem(self.ellipseBlack)
 
-        #if self.day > 28: self.day = 0
-        #self.day += 1
-        # print(self.day)
         if moon_phase < 15:
             self.ellipseBlack = self.scene.addEllipse((moon_phase * -increment) + 50, 30, 100, 100, self.pen, self.brushBlack)
         else:
             self.ellipseBlack = self.scene.addEllipse(((moon_phase - 28) * -increment) + 50, 30, 100, 100, self.pen, self.brushBlack)
-        # self.update()
 
 
 if __name__ == "__main__":
